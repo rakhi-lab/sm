@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+
+      background: url(./assets/BG1.jpg) no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .navbar {
+      background: transparent;
+      padding: 1rem 2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .navbar .btn-quote {
+      border: 2px solid #4e73df;
+      color: #4e73df;
+      border-radius: 50px;
+      padding: 0.5rem 1.5rem;
+      transition: 0.3s;
+    }
+
+    .navbar .btn-quote:hover {
+      background: #4e73df;
+      color: #fff;
+    }
+
+    #hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+      height: 800px;
+    }
+
+    #hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    #hero h1 span {
+      color: #4e73df;
+    }
+
+    #hero p {
+      margin-top: 1rem;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    #hero .btn-primary {
+      background: #4e73df;
+      border: none;
+      border-radius: 50px;
+      padding: 0.75rem 2rem;
+      margin-right: 1rem;
+      box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
+    }
+
+    #hero .btn-outline {
+      border: 2px solid #ff7b00;
+      color: #ff7b00;
+      border-radius: 50px;
+      padding: 0.75rem 2rem;
+      transition: 0.3s;
+    }
+
+    #hero .btn-outline:hover {
+      background: #ff7b00;
+      color: #fff;
+    }
+
+    /* Hero Image + Multicolor Rounded Background */
+    .hero-image-wrapper {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #df76ff, #1e3c91);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      box-shadow: 0 0 100px rgba(78, 115, 223, 0.6);
+    }
+
+    .hero-bg-circle::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 70% 70%, #47f3ff, #ff7b00);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.3);
+      filter: blur(50px);
+      opacity: 0.6;
+      z-index: -1;
+      animation: float-glow 6s ease-in-out infinite alternate;
+    }
+
+    .hero-bg-circle::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #00bcd4, #007bff);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+      filter: blur(60px);
+      opacity: 0.5;
+      z-index: -2;
+      animation: float-glow 8s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes float-glow {
+      0% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translate(-50%, -52%) scale(1.3);
+        opacity: 0.9;
+      }
+    }
+
+    #hero img {
+      max-width: 400px;
+      border-radius: 50%;
+      z-index: 2;
+      position: relative;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+      transition: transform 0.4s ease;
+      padding: 5px;
+    }
+
+    #hero img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Floating icons */
+    .floating-icon {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      animation: float 4s ease-in-out infinite;
+      font-size: 1.5rem;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    /* Animated background shapes */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.6;
+      animation: move 10s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    .bg-shape.one {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #4e73df, #1e3c91);
+      top: -100px;
+      left: -150px;
+      animation-delay: 0s;
+    }
+
+    .bg-shape.two {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #d673e5, #47b8ff);
+      bottom: -80px;
+      right: -100px;
+      animation-delay: 2s;
+    }
+
+    .bg-shape.three {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, #00bcd4, #007bff);
+      top: 50%;
+      left: 60%;
+      transform: translate(-50%, -50%);
+      animation-delay: 4s;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(30px, -20px) scale(1.1);
+      }
+
+      100% {
+        transform: translate(-20px, 25px) scale(1);
+      }
+    }
+
+
+    /* price and Content */
+
+    /* PREMIUM OFFER SECTION */
+    #premium-offer {
+      background-color: #f8f9fc;
+      padding: 5rem 0;
+    }
+
+    #premium-offer .shadow-lg {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    #premium-offer .rounded-4 {
+      border-radius: 1.5rem;
+    }
+
+    #premium-offer h2 {
+      font-size: 2.2rem;
+      color: #343a40;
+    }
+
+    #premium-offer p {
+      color: #6c757d;
+      font-size: 1rem;
+    }
+
+    #premium-offer .badge {
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 50px;
+    }
+
+    #premium-offer .price-tag {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #198754;
+    }
+
+    #premium-offer .btn-buy {
+      background: linear-gradient(to right, #28a745, #218838);
+      color: #fff;
+      font-size: 1.1rem;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: 0.3s ease-in-out;
+    }
+
+    #premium-offer .btn-buy:hover {
+      background: linear-gradient(to right, #218838, #1e7e34);
+    }
+
+    #premium-offer .btn-bundle {
+      background: linear-gradient(90deg, #0056ff, #9a00ff);
+      color: #fff;
+      font-size: 1.1rem;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: 0.3s ease;
+    }
+
+    #premium-offer .btn-bundle:hover {
+      opacity: 0.85;
+    }
+
+    #premium-offer .btn-outline-danger,
+    #premium-offer .btn-outline-primary,
+    #premium-offer .btn-outline-success,
+    #premium-offer .btn-outline-info {
+      border-radius: 10px;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    #premium-offer img {
+      transition: transform 0.4s ease;
+    }
+
+    #premium-offer img:hover {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 768px) {
+      #premium-offer h2 {
+        font-size: 1.8rem;
+      }
+
+      #premium-offer .btn-buy,
+      #premium-offer .btn-bundle {
+        font-size: 1rem;
+      }
+
+      #premium-offer img {
+        max-width: 100%;
+      }
+    }
+
+    /* Premium image styles */
+    .shadow-img {
+      filter: drop-shadow(0 12px 10px rgba(71, 73, 74, 0.698));
+    }
+
+    .animate-img:hover {
+      transform: scale(1.03);
+      filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.633));
+    }
+
+    /* Floating badge or icon */
+    .floating-badge {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background: #ffc107;
+      color: #212529;
+      font-size: 1.25rem;
+      padding: 0.4rem 0.7rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      font-weight: bold;
+      animation: pulse-badge 2s infinite;
+    }
+
+    @keyframes pulse-badge {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.85;
+      }
+    }
+
+
+    /* Section Background */
+    @import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+    :root {
+      --gradient-percent: 0%;
+    }
+
+    h1 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      letter-spacing: 2px;
+      font-size: 48px;
+      text-align: center;
+    }
+
+    p {
+      font-family: 'Lato', sans-serif;
+      letter-spacing: 1px;
+      font-size: 14px;
+      color: #333333;
+    }
+
+    .header {
+      position: relative;
+      text-align: center;
+      background: linear-gradient(90deg, rgba(76, 115, 184, 0.8) var(--gradient-percent), rgba(154, 198, 229, 1) 100%);
+      color: white;
+ 
+    }
+
+    .logo {
+      width: 50px;
+      fill: white;
+      padding-right: 15px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .inner-header {
+      height: 15vh;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .flex {
+      /*Flexbox for containers*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .waves {
+      position: relative;
+      width: 100%;
+      height: 15vh;
+      margin-bottom: -7px;
+      /*Fix for safari gap*/
+      min-height: 100px;
+      max-height: 150px;
+    }
+
+    .content {
+      position: relative;
+      height: 20vh;
+      text-align: center;
+      background-color: white;
+    }
+
+    /* Animation */
+    .parallax>use {
+      animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+    }
+
+    .parallax>use:nth-child(1) {
+      animation-delay: -2s;
+      animation-duration: 7s;
+    }
+
+    .parallax>use:nth-child(2) {
+      animation-delay: -3s;
+      animation-duration: 10s;
+    }
+
+    .parallax>use:nth-child(3) {
+      animation-delay: -4s;
+      animation-duration: 13s;
+    }
+
+    .parallax>use:nth-child(4) {
+      animation-delay: -5s;
+      animation-duration: 20s;
+    }
+
+    @keyframes move-forever {
+      0% {
+        transform: translate3d(-90px, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(85px, 0, 0);
+      }
+    }
+
+    /*Shrinking for mobile*/
+    @media (max-width: 768px) {
+      .waves {
+        height: 40px;
+        min-height: 40px;
+      }
+
+      .content {
+        height: 30vh;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+
+    .desc-section {
+      background: #f4f7ff;
+      border-top: 1px solid #e3e9f6;
+      border-bottom: 1px solid #e3e9f6;
+    }
+
+    /* Glass Effect Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      transition: transform 0.5s ease-in-out, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+      background: #4e72de linear-gradient(145deg, #4e72de, white);
+      color: white;
+    }
+
+    /* Icon Styling */
+    .icon-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      font-size: 1.8rem;
+      color: #fff;
+      background: linear-gradient(135deg, #6b73ff, #000dff);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(90deg, #0056ff, #8f00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Section Background */
+    .desc-section {
+      background: #f4f7ff;
+      border-top: 1px solid #e3e9f6;
+      border-bottom: 1px solid #e3e9f6;
+    }
+
+    /* Text Styling */
+    .desc-section .lead {
+      padding-top: 15px;
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Glass Effect Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Icon Styling */
+    .icon-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      font-size: 1.8rem;
+      color: #fff;
+      background: linear-gradient(135deg, #6b73ff, #000dff);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Subtle background colors for icons */
+    .bg-primary-subtle {
+      background: linear-gradient(135deg, #5a86ff, #3a54f1);
+    }
+
+    .bg-success-subtle {
+      background: linear-gradient(135deg, #45d39d, #00b77b);
+    }
+
+    .bg-danger-subtle {
+      background: linear-gradient(135deg, #ff6b6b, #ff3c3c);
+    }
+
+    .bg-warning-subtle {
+      background: linear-gradient(135deg, #ffb74d, #ff9800);
+    }
+
+    .bg-info-subtle {
+      background: linear-gradient(135deg, #4db6ff, #2196f3);
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(90deg, #0056ff, #8f00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Rating */
+    .rating-stars i {
+      color: #ffc107;
+    }
+
+    .review-response {
+      background-color: #eef6fb;
+      border-left: 4px solid #0dcaf0;
+      padding: 12px 15px;
+      border-radius: 5px;
+    }
+
+    .collapse-toggle {
+      cursor: pointer;
+      color: #0d6efd;
+    }
+
+    .review-card:hover {
+      background-color: #f9f9f9;
+    }
+
+    .progress-label {
+      font-weight: 500;
+    }
+
+    /* Base school-themed button */
+    .school-btn {
+      font-weight: 600;
+      border-radius: 30px;
+      padding: 0.6rem 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      color: #fff;
+    }
+
+    .school-btn:hover {
+      transform: scale(1.1) rotateX(-15deg);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      background-color: #0d6efd;
+      /* for primary button */
+      color: #fff;
+    }
+
+
+    /* Trustpilot button */
+    .trustpilot-btn {
+      background: #2a9d49;
+      border: none;
+    }
+
+    .trustpilot-btn:hover {
+      background: #21867a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Google button */
+    .google-btn {
+      background: #f4b400;
+      border: none;
+    }
+
+    .google-btn:hover {
+      background: #d99c00;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .rating-stars i {
+      color: #ffc107;
+      margin-right: 2px;
+    }
+
+    .review-response {
+      background-color: #eef6fb;
+      border-left: 4px solid #0dcaf0;
+      padding: 12px 15px;
+      border-radius: 5px;
+    }
+
+    .collapse-toggle {
+      cursor: pointer;
+      color: #0d6efd;
+      font-weight: 500;
+    }
+
+    .review-card:hover {
+      background-color: #f8f9fa;
+      transform: translateY(-2px);
+      transition: all 0.3s ease;
+    }
+
+    .progress-label {
+      font-weight: 500;
+    }
+
+    .card button {
+      font-size: 0.85rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    .publication-card {
+      background: linear-gradient(135deg, #000000, #627189);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .publication-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .publication-card .btn-primary {
+      transition: all 0.3s ease;
+    }
+
+    .publication-card .btn-primary:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    }
+
+
+    /* Background shapes */
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 20s infinite linear;
+      z-index: -1;
+    }
+
+    .shape1 {
+      width: 180px;
+      height: 180px;
+      background: #007bff;
+      top: -60px;
+      left: -40px;
+      animation-duration: 25s;
+    }
+
+    .shape2 {
+      width: 120px;
+      height: 120px;
+      background: #ffc107;
+      bottom: -40px;
+      right: -30px;
+      animation-duration: 30s;
+    }
+
+    .shape3 {
+      width: 100px;
+      height: 100px;
+      background: #28a745;
+      top: 50%;
+      left: 85%;
+      animation-duration: 28s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-30px) translateX(15px) rotate(45deg);
+      }
+
+      100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+      }
+    }
+
+    /* Section Title */
+    .section-title {
+      display: inline-block;
+      position: relative;
+      padding-bottom: 10px;
+      font-size: 2.2rem;
+      text-align: center;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      background: #007bff;
+      bottom: 0;
+      left: 20%;
+      border-radius: 2px;
+    }
+
+    /* Carousel Styling */
+    #pluginsSlider img {
+      height: 350px;
+      object-fit: cover;
+      transition: transform 1.2s ease;
+    }
+
+    #pluginsSlider .carousel-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .carousel-caption {
+      bottom: 20px;
+      animation: fadeInUp 1s ease-in-out;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+      border-radius: 0.5rem;
+      padding: 0.8rem;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* App Cards */
+    .app-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .app-card:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* App cards styling */
+    .app-cards {
+      position: relative;
+      list-style: none;
+      padding: 0;
+      max-width: 40em;
+      margin: 0 auto;
+      height: 450px;
+    }
+
+    .app-cards .card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      background: #fff;
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+      transform: translateY(0) rotate(4deg) translateX(25px) scale(1);
+      transform-origin: 0 0;
+      transition: transform 0.6s cubic-bezier(.8, .2, .1, 0.8), background 0.4s linear;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .app-cards .card--next {
+      z-index: 5;
+      transform: translateY(-25px) rotate(4deg) translateX(25px) scale(1);
+    }
+
+    .app-cards .card--out {
+      transform: translateY(-50px) rotate(8deg) translateX(55px) scale(0.95);
+      z-index: 1;
+      background: #f0f0f0;
+    }
+
+    .app-cards .card--current {
+      position: relative;
+      z-index: 10;
+      background: #fff;
+      transform: rotate(-1deg) translateX(0%) scale(1);
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .section-title {
+      display: inline-block;
+      position: relative;
+      padding-bottom: 16px;
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+
+      /* Fancy animated gradient text */
+      background: linear-gradient(120deg, #ff6ec4, #6fcdff, hsl(302, 36%, 61%), #3bb2b8, #ff6ec4);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: bounceIn 0.6s ease forwards;
+
+      transition: background-position 1s ease;
+    }
+
+    /* Shine gradient on hover */
+    .section-title:hover {
+      background-position: right;
+    }
+
+    /* Underline effect with neon glow and animation */
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: center;
+      width: 100%;
+      height: 3px;
+
+      background: linear-gradient(90deg, #ff6ec4, #7873f5);
+      box-shadow: 0 0 8px rgba(255, 110, 196, 0.7), 0 0 15px rgba(120, 115, 245, 0.5);
+      border-radius: 3px;
+
+      transition: transform 0.5s ease;
+    }
+
+    /* Animate the underline from center */
+    .section-title:hover::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    /* Carousel images */
+    #pluginsSlider img {
+      height: 100%;
+      /* Increased height */
+      object-fit: contain;
+      /* Show the full image without cropping */
+      width: 100%;
+      transition: transform 1s ease;
+    }
+
+    #pluginsSlider .carousel-item:hover img {
+      transform: scale(1.03);
+      /* Slight zoom on hover */
+    }
+
+    /* Ensure captions are not covering images too much */
+    .carousel-caption {
+      bottom: 15px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 0.5rem;
+      padding: 0.8rem;
+    }
+
+
+    /* demo cads */
+    .card-grid {
+
+      max-width:100%;
+      margin: 0 auto;
+    }
+
+    /* Fancy card style */
+    .fancy-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgb(0 0 0 / 0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .fancy-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 30px 60px rgba(38, 57, 77, 0.3);
+      z-index: 10;
+    }
+
+    /* Image container with overlay */
+    .card-image {
+      position: relative;
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+    .card-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(38, 57, 77, 0.4), rgba(38, 57, 77, 0.7));
+      transition: background 0.4s ease;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+    .fancy-card:hover .card-image::after {
+      background: linear-gradient(180deg, rgba(38, 57, 77, 0.2), rgba(38, 57, 77, 0.4));
+    }
+    .fancy-card:hover .card-image {
+      transform: scale(1.1);
+    }
+
+    /* Shine effect on hover */
+    .fancy-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.25),
+        rgba(255, 255, 255, 0)
+      );
+      transform: skewX(-20deg);
+      pointer-events: none;
+      transition: left 0.6s ease;
+      z-index: 5;
+      border-radius: 20px;
+    }
+    .fancy-card:hover::before {
+      left: 125%;
+      transition: left 0.6s ease;
+    }
+
+    /* Card content */
+    .card-content {
+      padding: 25px 20px;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .card-content h3 {
+      color: #2575fc;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+    .card-content p {
+      font-size: 1rem;
+      color: #4a4a4a;
+      line-height: 1.4;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Responsive fix for cards height */
+  
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">The School Management</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+          <li class="nav-item ms-3"><button class="btn btn-quote">Get A Demo</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="container-fluid">
+    <!-- Background shapes -->
+    <div class="bg-shape one"></div>
+    <div class="bg-shape two"></div>
+    <div class="bg-shape three"></div>
+
+    <div>
+      <h1>School Management - <span>Education & Learning Management</span> Solution</h1>
+      <p>School Management is the best WordPress plugin to manage complete school operation. The system has
+        <br>different access rights for Super Admin, School Admin, Teacher, Student and Parent.
+      </p>
+      <div class="mt-4">
+        <button class="btn btn-primary">Get Started</button>
+        <button class="btn btn-outline">Learn How</button>
+      </div>
+    </div>
+
+    <!-- Image with glowing rounded background -->
+    <div class="hero-image-wrapper position-relative">
+      <div class="hero-bg-circle"></div>
+      <img src="../assets/School-kids/—Pngtree—adorable school boy and girl_19944303.png" alt="School Hero Image">
+      <div class="floating-icon" style="top:10%; left:-20px;">🎓</div>
+      <div class="floating-icon" style="bottom:10%; right:-20px;">📚</div>
+      <div class="floating-icon" style="top:50%; right:-20px;">🚌</div>
+    </div>
+  </section>
+
+
+  <!-- Premium Offer Section -->
+  <section id="premium-offer" class="bg-light py-5">
+    <div class="container">
+      <div class="row align-items-center g-5  p-4 rounded-4">
+
+        <!-- Left: Illustration -->
+        <div class="col-lg-6 text-center">
+          <div class="premium-img-wrapper position-relative d-inline-block">
+            <img src="../assets/School-kids/—Pngtree—two cartoon style childs going_20438147.png"
+              alt="Premium School Management Plugin" class="img-fluid rounded-4 shadow-img animate-img"
+              style="max-width: 92%; transition: transform 0.4s ease, filter 0.4s ease;">
+
+            <!-- Optional floating icon or badge -->
+            <span class="floating-badge">🎓</span>
+          </div>
+        </div>
+
+        <!-- Right: Offer Content -->
+        <div class="col-lg-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="badge bg-gradient text-white px-3 py-2"
+              style="background: linear-gradient(to right, #007bff, #6f42c1); font-size: 0.9rem;">
+              🔥 Best Deal
+            </span>
+            <span class="text-muted small">Limited Time Offer</span>
+          </div>
+
+          <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Get Full Access to Our Premium Plugin</h2>
+          <p class="text-muted mb-4" style="line-height: 1.8;">
+            Unlock the full power of School Management with all features included. One-time payment, lifetime updates,
+            and premium support.
+          </p>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <button class="btn btn-buy btn-lg w-100">Buy Now</button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-bundle btn-lg w-100">Get Plugin Bundle</button>
+            </div>
+          </div>
+
+
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <button class="btn btn-outline-danger btn-sm">Purchase</button>
+            <button class="btn btn-outline-primary btn-sm">View Demo</button>
+            <button class="btn btn-outline-success btn-sm">Get Support</button>
+            <button class="btn btn-outline-info btn-sm">Documentation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container my-5">
+    <div class="row g-4">
+      <!-- Left Column: Rating Overview -->
+      <div class="col-lg-5">
+        <div class="card shadow-sm p-4 rounded-4 border-0">
+          <h2 class="mb-3 fw-bold">Loved by Our Users Worldwide</h2>
+          <p class="text-muted">Your feedback inspires us to improve and helps thousands trust our plugins.</p>
+          <hr>
+          <h4 class="fw-semibold mt-3">See what people are saying:</h4>
+          <div class="d-flex flex-wrap gap-3 m-4 align-items-center">
+
+            <!-- Trustpilot -->
+            <img src="https://img.icons8.com/?size=512&id=68aEVTzfHi6F&format=png" alt="Trustpilot"
+              style="height:30px; width:auto;">
+            <h5><span class="me-2">Verified Ratings on</span>
+              <button class="btn school-btn trustpilot-btn btn-lg p-2"><a class="text-white text-decoration-none"
+                  href="https://www.trustpilot.com/review/weblizar.com"> Trustpilot</a>
+              </button>
+            </h5>
+            <br>
+            <h5>
+              <!-- Google Reviews -->
+              <img src="https://img.icons8.com/color/512/google-logo.png" alt="Google"
+                style="height:30px; width:auto; ">
+              <span class="me-2">Honest Feedback on</span>
+              <button class="btn school-btn google-btn btn-lg p-2 text-decoration-none"><a class="text-white"
+                  href="google.com/maps/place/Weblizar+-+WordPress+Themes+and+Plugins/@25.1236805,75.8382225,826m/data=!3m1!1e3!4m8!3m7!1s0x396f84eea231f96d:0x232f3b6b360d6b35!8m2!3d25.1236805!4d75.8382225!9m1!1b1!16s%2Fg%2F11cp7xbp3k?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D">
+                  Google Reviews</a>
+              </button>
+
+            </h5>
+
+          </div>
+
+          <div class="d-flex align-items-center mb-4">
+            <h1 class="display-5 fw-bold me-3">4.7</h1>
+            <div>
+              <div class="rating-stars fs-4 mb-1">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="text-muted">(Based on 565 ratings)</span>
+            </div>
+          </div>
+
+          <!-- School Performance Progress Bars -->
+          <div class="mb-3">
+            <!-- Academic Excellence -->
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span>Academic Excellence</span>
+              <span>4.8</span>
+            </div>
+            <div class="progress mb-3" style="height: 8px;">
+              <div class="progress-bar bg-primary" style="width: 96%"></div>
+            </div>
+
+            <!-- Extracurricular Activities -->
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span>Extracurricular Activities</span>
+              <span>4.5</span>
+            </div>
+            <div class="progress mb-3" style="height: 8px;">
+              <div class="progress-bar bg-success" style="width: 90%"></div>
+            </div>
+
+            <!-- Student Support & Care -->
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span>Student Support & Care</span>
+              <span>4.7</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-warning" style="width: 94%"></div>
+            </div>
+          </div>
+
+          <!-- Collapse Summary -->
+          <p class="mt-3 collapse-toggle fw-medium" data-bs-toggle="collapse" href="#summary" role="button"
+            aria-expanded="false" aria-controls="summary">
+            Show summary ▼
+          </p>
+          <div class="collapse" id="summary">
+            <div class="card card-body bg-light border-0 rounded-3 shadow-sm">
+              Summary section can contain insights, trends, or analysis based on collected reviews.
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Right Column: Reviews -->
+      <div class="col-lg-7">
+        <div class="card shadow-sm p-4 rounded-4 border-0">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="mb-0 fw-bold">Reviews <span class="text-muted">(100+)</span></h5>
+            <div class="d-flex gap-2">
+              <select class="form-select form-select-sm">
+                <option selected>Verified</option>
+              </select>
+              <select class="form-select form-select-sm">
+                <option selected>All Ratings</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Review 1 -->
+          <div class="p-3 mb-4 border rounded-3 review-card shadow-sm">
+            <div class="d-flex justify-content-between mb-2">
+              <h6 class="fw-semibold">Julia, Berlin</h6>
+              <small class="text-muted">Sep 11</small>
+            </div>
+            <div class="rating-stars mb-2 text-warning fs-5">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <strong>Moved here from another insurance company</strong>
+            <p class="mb-0 text-muted">Great car insurance company! Efficient and reliable service. Quick claims
+              processing and excellent customer support. Affordable premiums and a wide range of coverage options.</p>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="p-3 mb-4 border rounded-3 review-card shadow-sm">
+            <div class="d-flex justify-content-between mb-2">
+              <h6 class="fw-semibold">Kim, Frankfurt</h6>
+              <small class="text-muted">Aug 11</small>
+            </div>
+            <div class="rating-stars mb-2 text-warning fs-5">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                class="far fa-star"></i><i class="far fa-star"></i>
+            </div>
+            <strong>Decent Car Insurance Company with Room for Improvement</strong>
+            <p class="text-muted mb-2">Decent car insurance company. Average service and claims processing time.
+              Customer support could be better. Premiums are somewhat affordable, but coverage options are limited.</p>
+            <div class="review-response mt-2">
+              <strong>Soglasie</strong> <small class="text-muted">Sep 12</small>
+              <p class="mb-0">Hi Kim! We've responded to your email. Please check your inbox, including the Spam folder.
+                Thanks for your patience and regards, Soglasie Team.</p>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="container my-4 ">
+          <div class="row">
+            <div class="col">
+              <div
+                class="card publication-card p-3 rounded-4 border-0 d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="d-flex align-items-center mb-2 mb-md-0">
+                  <img src="https://cdn-icons-png.flaticon.com/128/7213/7213445.png" alt="Education Icon"
+                    style="height:40px; width:40px;" class="me-3">
+                  <div>
+
+                    <small class="text-white fs-4">Published: 24/07/2019</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <style>
+            .theme-info-section {
+              background: linear-gradient(135deg, #f9fbff, #ffffff);
+            }
+
+            .browser-badge {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              background: white;
+              border-radius: 30px;
+              padding: 8px 14px;
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+              font-size: 0.9rem;
+              font-weight: 500;
+              transition: all 0.3s ease;
+            }
+
+            .browser-badge img {
+              height: 20px;
+              width: 20px;
+            }
+
+            .browser-badge:hover {
+              transform: scale(1.1);
+              background: #007bff;
+              color: white;
+            }
+
+            .theme-preview {
+              transition: transform 0.4s ease;
+            }
+
+            .theme-preview:hover {
+              transform: scale(1.05) rotate(-1deg);
+            }
+          </style>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="theme-info-section py-5">
+    <div class="container">
+      <!-- Section Heading -->
+      <div class="text-center mb-5">
+        <h2 class="fw-bold mb-2">Wheelify WordPress Theme</h2>
+        <p class="text-muted">Seamlessly compatible and designed for performance</p>
+      </div>
+
+      <div class="row align-items-center">
+        <!-- Left: Info -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="p-4 rounded-4 shadow-sm bg-light">
+            <h5 class="fw-semibold mb-3">Compatible Browsers:</h5>
+            <div class="d-flex flex-wrap gap-3">
+              <span class="browser-badge">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Edge" />
+                Edge
+              </span>
+              <span class="browser-badge">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732202.png" alt="Firefox" />
+                Firefox
+              </span>
+              <span class="browser-badge">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732223.png" alt="Chrome" />
+                Chrome
+              </span>
+              <span class="browser-badge">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732225.png" alt="Safari" />
+                Safari
+              </span>
+              <span class="browser-badge">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732207.png" alt="Opera" />
+                Opera
+              </span>
+            </div>
+
+            <hr class="my-4">
+
+            <h6 class="text-uppercase fw-semibold text-primary">Developed by</h6>
+            <div class="d-flex align-items-center mt-2">
+              <img src="https://weblizar.com/wp-content/uploads/2016/04/logo.png" alt="Weblizar Logo"
+                style="height:50px;width:50px;border-radius:50%;" class="me-3 shadow-sm">
+              <span class="fw-bold">Weblizar</span>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Right: Theme Image -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <img src="./assets/drawing285.jpg" alt="" class="w-100">
+        </div>
+
+
+      </div>
+  </section>
+
+  <!-- App Section -->
+
+  <!-- Plugins & Apps Section -->
+  <section class="plugins-apps-section position-relative py-5 overflow-hidden">
+    <!-- Animated background shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <!-- Section Title -->
+    <div class="text-center mb-5 position-relative">
+      <h2 class="fw-bold section-title">Our WordPress Plugins & Android Apps</h2>
+      <p class="text-muted mb-1">Premium solutions for schools and businesses</p>
+      <small class="text-secondary">Designed by <strong>Weblizar Team</strong></small>
+    </div>
+
+    <div class="container">
+
+      <div class="row align-items-center">
+        <!-- Plugins Carousel -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="fw-bold section-title mb-4">Our Plugin</h2>
+          <p class="text-muted mb-5">Interactive mobile solutions for schools, teachers, and parents</p>
+
+          <div id="pluginsSlider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+            <div class="carousel-inner rounded-4 shadow-sm overflow-hidden">
+              <div class="carousel-item active position-relative">
+                <a href="https://weblizar.com/plugins/the-hr-manager-employee-payroll-management" target="_blank">
+                  <img src="https://weblizar.com/wp-content/uploads/2024/11/Inline-Preview-Image-thhrmanagers.jpg"
+                    class="d-block w-100 rounded-4" alt="HR Manager Plugin">
+                  <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-3">
+                    <h5 class="fw-bold text-white">HR Manager - Employee & Payroll</h5>
+                    <p class="text-light small mb-0">Manage employee records, attendance, and salary with ease.</p>
+                  </div>
+                </a>
+              </div>
+              <div class="carousel-item position-relative">
+                <a href="https://weblizar.com/plugins/school-management/" target="_blank">
+                  <img
+                    src="https://weblizar.com/wp-content/uploads/2019/09/School-Management-Education-Learning-Management-system.jpg"
+                    class="d-block w-100 rounded-4" alt="School Management Plugin">
+                  <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-3">
+                    <h5 class="fw-bold text-white">School Management</h5>
+                    <p class="text-light small mb-0">Education & Learning Management System for modern schools.</p>
+                  </div>
+                </a>
+              </div>
+              <div class="carousel-item position-relative">
+                <a href="https://weblizar.com/plugins/ultimate-timeline/" target="_blank">
+                  <img
+                    src="https://weblizar.com/wp-content/uploads/2022/05/Ultimate-Timeline-Pro-Inline-Preview-Image.jpg"
+                    class="d-block w-100 rounded-4" alt="Ultimate Timeline Plugin">
+                  <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-3">
+                    <h5 class="fw-bold text-white">Ultimate Timeline Plugin</h5>
+                    <p class="text-light small mb-0">Display events, milestones, and school achievements beautifully.
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#pluginsSlider" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#pluginsSlider" data-bs-slide="next">
+              <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Apps Cards -->
+        <div class="col-lg-6">
+
+          <!-- <div class="col-md-6"> -->
+          <!-- Apps Section -->
+          <section class="apps-cards-section py-5 position-relative">
+            <div class="container ">
+              <h2 class="fw-bold section-title mb-4 text-center">Our Android Apps</h2>
+              <p class="text-muted mb-5">Interactive mobile solutions for schools, teachers, and parents</p>
+
+              <ul class="app-cards">
+                <li class="card card--current">
+                  <img
+                    src="https://play-lh.googleusercontent.com/YsUlOFJb8dm7nWMRIgqB9bv5TdA5SdupgRfNGpT9u-Rbxj4pm_aXn5q3fsRRn1NP-Oc=w416-h235-rw"
+                    alt="School App" style="height:180px;" class="mb-3 img-fluid">
+                  <h5 class="fw-bold">Laduli (Naukri Search App )</h5>
+                  <p class="small text-muted">Safety starts with understanding how developers collect and share your
+                    data. Data privacy and security practices may vary based on your use, region and age. The
+                    developer provided this information and may update it over time.</p>
+                  <a href="https://play.google.com/store/apps/details?id=com.laduli"
+                    class="btn btn-primary btn-sm mt-2">View App</a>
+                </li>
+                <li class="card">
+                  <img
+                    src="https://play-lh.googleusercontent.com/zeJtXIywHNmoQXwYVO6arQ4gQTJnh_VUvERu31_y9bjvBJ_yhxML41A_TaXqyiY5aQ=w416-h235-rw"
+                    alt="Teacher App" style="height:180px;" class="mb-3 img-fluid">
+                  <h5 class="fw-bold">Teacher App</h5>
+                  <p class="small text-muted">Send homework, notices, and grades directly to students.</p>
+                  <a href="#" class="btn btn-primary btn-sm mt-2">View App</a>
+                </li>
+                <li class="card">
+                  <img
+                    src="https://play-lh.googleusercontent.com/Wfp_DPavuOMvJt2rwCsZmUYsSDPY8NoYIz1qRLKGynpbdO8iusQrPOisJ1sKSx-R6SJq=w416-h235-rw"
+                    alt="Parent App" style="height:180px;" class="mb-3 img-fluid">
+                  <h5 class="fw-bold">Ati Priye Kids-Preschool App</h5>
+                  <p class="small text-muted">About this app
+                    Welcome to the official app of Ati Priye Kids Pre-School – designed to bring parents, teachers,
+                    and school administration closer through seamless digital communication and smart school
+                    management.
+                  </p>
+                  <a href="https://play.google.com/store/apps/details?id=com.atipriyekids"
+                    class="btn btn-primary btn-sm mt-2">View App</a>
+                </li>
+                <li class="card">
+                  <img
+                    src="https://play-lh.googleusercontent.com/S_GDYT7qZ8VB9wb9Q0vQu6HSChex8tz9yPnBc55cZVKbpaPcG5obr6g-MwAafaWocoE=w416-h235-rw"
+                    alt="eLearning App" style="height:180px;" class="mb-3 img-fluid">
+                  <h5 class="fw-bold">Multi Institute App</h5>
+                  <p class="small text-muted">Multi Institute is a comprehensive education management app designed for
+                    students across multiple institutes. Stay connected with your academic journey—anytime, anywhere.
+                    With Multi Institute, students can:
+                    View exam results instantly
+                    1. Track daily attendance
+                    2. Access study materials and notes</p>
+                  <a href="http://play.google.com/store/apps/details?id=com.multiInstitute"
+                    class="btn btn-primary btn-sm mt-2">View App</a>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const cardsContainer = document.querySelector('.app-cards');
+              const cards = Array.from(cardsContainer.children);
+              let currentIndex = 0;
+
+              function updateCards() {
+                cards.forEach((card, index) => {
+                  card.classList.remove('card--current', 'card--next', 'card--out');
+                  if (index === currentIndex) card.classList.add('card--current');
+                  else if (index === (currentIndex + 1) % cards.length) card.classList.add('card--next');
+                  else card.classList.add('card--out');
+                });
+              }
+
+              cards.forEach(card => {
+                card.addEventListener('click', () => {
+                  currentIndex = cards.indexOf(card);
+                  updateCards();
+                });
+              });
+
+              // Optional: Auto-rotate every 4s
+              setInterval(() => {
+                currentIndex = (currentIndex + 1) % cards.length;
+                updateCards();
+              }, 4000);
+
+              updateCards();
+            });
+          </script>
+
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+     <div class="header">
+      <div class="inner-header container-fluid flex">
+        <h1>School Management - Education & Learning Management</h1>
+      </div>
+
+      <!--Waves Container-->
+      <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+          <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+          </defs>
+          <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+          </g>
+        </svg>
+      </div>
+      <!--Waves end-->
+
+    </div>
+
+  <section class="desc-section container-fluid">
+
+
+
+    <!-- <div class="container"> -->
+    <div class="container my-5">
+      <div class="row align-items-center">
+
+        <!-- Left Column: Text (2/3) -->
+        <div class="col-lg-9">
+          <p class="lead text-muted mb-4">
+            School Management is a WordPress plugin to manage one or multiple schools and their entities such as
+            classes, sections, students, exams, ID cards, admit cards, teachers, staff, fees, invoices, income, expense,
+            noticeboard, study materials, staff/teacher can send the homework SMS on student/parents mobile number and
+            much more.
+          </p>
+          <p class="lead text-muted mb-4">
+            Your school can take live classes of your students using Zoom, creating unlimited live sessions with our
+            system. You can publish results, admit cards, and certificates publicly. Without any login, students can get
+            results using their details.
+          </p>
+          <p class="lead text-muted mb-4">
+            <strong class="text-dark fw-bold text-decoration-underline">Now eLearning management:</strong> You can
+            upload subject-wise Video Classes (Recorded Video Classes) and Documents (PNG, JPG, PDF Files) or YouTube
+            Videos.
+          </p>
+          <p class="lead text-muted mb-4">
+            <strong class="text-black fw-bold text-decoration-underline"> Payment gateway:</strong> Paypal, Stripe,
+            Pesapal, Paystack, Razorpay, PayTM, Bank Transfer, UPI Transfer.
+          </p>
+          <p class="lead text-muted mb-4">
+            <strong>SMS Service Providers: </strong>Nexmo, Twilio, MsgClub, SMS Striker, Msg91, TextLocal, EBulkSMS,
+            Infigo SMS.
+          </p>
+          <p class="lead text-muted mb-4">
+            <strong class="text-black fw-bold text-decoration-underline"> Android Mobile App:</strong> Allows students
+            and parents to log in and manage student-related activities like homework, study material, book issue, class
+            timetable, attendance, student profile details, exam results, admit cards, notifications, events, fee
+            invoices, payment history, and more.
+          </p>
+        </div>
+
+        <!-- Right Column: Image (1/3) -->
+        <div class="col-lg-3 text-center">
+          <img src="../assets/school-logo.png" alt="School Management Illustration" class="img-fluid rounded ">
+          <img src="../assets/School-kids/—Pngtree—adorable school boy and girl_19944303.png"
+            alt="School Management Illustration" class="img-fluid rounded ">
+
+        </div>
+
+      </div>
+      <div class="row g-4">
+        <!-- Feature Cards -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="desc-card d-flex glass-card">
+            <div class="icon-wrap bg-primary-subtle">
+              <i class="bi bi-building"></i>
+            </div>
+            <div>
+              <h5>Institution Management</h5>
+              <p>Manage students, staff, fees, ID cards, and more—effortlessly from one dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="desc-card d-flex glass-card">
+            <div class="icon-wrap bg-success-subtle">
+              <i class="bi bi-camera-video"></i>
+            </div>
+            <div>
+              <h5>eLearning + Live Zoom</h5>
+              <p>Upload YouTube links, documents, and host live classes directly inside your portal.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="desc-card d-flex glass-card">
+            <div class="icon-wrap bg-danger-subtle">
+              <i class="bi bi-credit-card-2-back"></i>
+            </div>
+            <div>
+              <h5>Online Fee Collection</h5>
+              <p>Integrate PayPal, Stripe, Razorpay, UPI & more. Generate invoices automatically.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="desc-card d-flex glass-card">
+            <div class="icon-wrap bg-warning-subtle">
+              <i class="bi bi-chat-dots"></i>
+            </div>
+            <div>
+              <h5>SMS Alerts</h5>
+              <p>Send real-time updates via Twilio, Msg91, Nexmo, SMS Striker and others.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12" data-aos="fade-up" data-aos-delay="500">
+          <div class="desc-card d-flex glass-card">
+            <div class="icon-wrap bg-info-subtle">
+              <i class="bi bi-phone"></i>
+            </div>
+            <div>
+              <h5>Mobile App for Parents</h5>
+              <p>Let parents and students track homework, fees, attendance, results, and more on the go.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+<!--Mobile Sccanner Section -->
+  <!-- <section class="app-section text-center" data-aos="fade-up">
+  
+  <div class="title-shapes" data-aos="zoom">
+    <div class="shape-circle one"></div>
+    <div class="shape-circle two"></div>
+    <div class="shape-blob"></div>
+  </div>
+
+  <div class="container position-relative" data-aos="zoom-in">
+    <h1>
+      The School Management <br>
+      <span>📱 Mobile App</span>
+    </h1>
+    <p>Stay connected to your school — Anytime. Anywhere. On any device.</p>
+    <div class="badge-new">Now available on Android & iOS</div>
+
+    <div class="row mt-5 align-items-center justify-content-center">
+
+      <div class="col-md-4 qr">
+        <h5>📷 Scan to Download</h5>
+        <img src="./assets/img-scannar/Android.png" alt="QR Android">
+        <img src="./assets/img-scannar/Apple.png" alt="QR iOS">
+      </div>
+
+      <div class="col-md-4 mockup">
+        <img src="https://theschool-management.com/wp-content/themes/theschool-2020/assets/images/phone-img.png" alt="Mobile Mockup">
+      </div>
+
+      <div class="col-md-4 store-buttons">
+        <h5><i class="fa-solid fa-download"></i> Download from</h5>
+        <a href="https://play.google.com/store/apps/details?id=com.intechnoschool" target="_blank">
+          <img src="https://theschool-management.com/wp-content/themes/theschool-2020/assets/images/playstore.png" alt="Google Play Store">
+        </a>
+        <a href="https://apps.apple.com/in/app/the-school-management/id6738578693" target="_blank">
+          <img src="https://theschool-management.com/wp-content/themes/theschool-2020/assets/images/appstore.png" alt="Apple App Store">
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section> -->
+
+
+
+
+  <!--Demo Card -->
+  <section class="demo-logins container">
+    <h2 class="section-title p-5 text-center">School Management Admin Demo Login Details</h2>
+
+    <div class="container card-grid mt-3">
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>Admin User</h3>
+              <p><strong>Username:</strong> userdemo<br /><strong>Password:</strong> userdemo</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>School Administrator</h3>
+              <p><strong>Username:</strong> school_administrator<br /><strong>Password:</strong> 123456</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1596495578061-c132b02c81e7?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>School Teacher</h3>
+              <p><strong>Username:</strong> school_teacher<br /><strong>Password:</strong> 123456</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1526947425960-945c6e728e1e?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>Accountant</h3>
+              <p><strong>Username:</strong> accountant<br /><strong>Password:</strong> 123456</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>Student 1</h3>
+              <p><strong>Username:</strong> student1<br /><strong>Password:</strong> 123456</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>Parent 1</h3>
+              <p><strong>Username:</strong> parent1<br /><strong>Password:</strong> 123456</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>Receptionist</h3>
+              <p><strong>Username:</strong> receptionist<br /><strong>Password:</strong> 123456</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="col-12 col-md-6 col-lg-3 d-flex">
+          <div class="fancy-card w-100">
+            <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1509099836639-18ba5231e5b0?auto=format&fit=crop&w=800&q=80');"></div>
+            <div class="card-content">
+              <h3>Librarian</h3>
+              <p><strong>Username:</strong> librarian<br /><strong>Password:</strong> 123456</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<STYLE>
+  /* ===== School Feature Section Styles ===== */
+.school-feature-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+.school-feature-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: url(../assets/team/businesspeople-exchanging-ideas.jpg) center/cover no-repeat; */
+  filter: blur(8px);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.feature-wrapper {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+}
+
+/* Title */
+.school-feature-section h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Banner Card Styles */
+.feature-list {
+  --col-gap: 2rem;
+  --barH: 1rem;
+  --roleH: 2rem;
+  --flapH: 2rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--col-gap);
+  list-style: none;
+  padding-inline: calc(var(--col-gap) / 2);
+}
+
+.feature-list li {
+  width: 10em;
+  display: grid;
+  grid-template:
+    "role"
+    "icon"
+    "title"
+    "descr";
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: center;
+  padding-bottom: calc(var(--flapH) + 1rem);
+  background: var(--accent-color);
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.6) var(--roleH),
+    rgba(0, 0, 0, 0.4) calc(var(--roleH) + 0.5rem),
+    rgba(0, 0, 0, 0) calc(var(--roleH) + 0.5rem + 5rem)
+  );
+  clip-path: polygon(
+    calc(var(--col-gap) / -2 - 5px) 0,
+    calc(100% + var(--col-gap) / 2 + 5px) 0,
+    calc(100% + var(--col-gap) / 2 + 5px) calc(100% - var(--flapH)),
+    50% 100%,
+    calc(var(--col-gap) / -2 - 5px) calc(100% - var(--flapH))
+  );
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #545353;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Decorative Bar */
+.feature-list li::before {
+  content: "";
+  grid-area: role;
+  height: var(--barH);
+  width: calc(100% + var(--col-gap));
+  margin-left: calc(var(--col-gap) / -2);
+  margin-top: calc(var(--roleH) / 2 - var(--barH) / 2);
+  background: grey;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.2) 30%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.2) 70%,
+    rgba(0, 0, 0, 0.4)
+  );
+  z-index: -1;
+}
+
+/* Role Background */
+.feature-list li::after {
+  content: "";
+  grid-area: role;
+  height: var(--roleH);
+  background: var(--accent-color);
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.2) 30%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.2) 70%,
+    rgba(0, 0, 0, 0.4)
+  );
+}
+
+.feature-list li .icon,
+.feature-list li .title,
+.feature-list li .descr {
+  padding-inline: 1rem;
+  color: white;
+  text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.feature-list li .icon {
+  font-size: 3rem;
+}
+
+.feature-list li .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.feature-list li .descr {
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .feature-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-list li {
+    width: 80%;
+  }
+}
+
+</STYLE>
+
+<section class="school-feature-section container">
+  <div class="feature-wrapper row">
+    <p class="section-title mb-2">School Management Roles</p>
+    <p class="section-subtitle mb-5">Explore the core users who help run and manage the school efficiently.</p>
+
+    <ul class="feature-list">
+      <li style="--accent-color:#0B374D">
+        <div class="icon"><i class="fa-solid fa-user-shield"></i></div>
+        <div class="title">Super Admin</div>
+        <div class="descr">Full control over all system settings and users.</div>
+      </li>
+
+      <li style="--accent-color:#1286A8">
+        <div class="icon"><i class="fa-solid fa-user-gear"></i></div>
+        <div class="title">Admin</div>
+        <div class="descr">Manages school operations, settings, and day-to-day activities.</div>
+      </li>
+
+      <li style="--accent-color:#D2B53B">
+        <div class="icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+        <div class="title">Teacher</div>
+        <div class="descr">Delivers lessons, assigns work, and tracks student progress.</div>
+      </li>
+
+      <li style="--accent-color:#DA611E">
+        <div class="icon"><i class="fa-solid fa-calculator"></i></div>
+        <div class="title">Accountant</div>
+        <div class="descr">Handles fee records, payments, and school budgeting.</div>
+      </li>
+
+      <li style="--accent-color:#AC2A1A">
+        <div class="icon"><i class="fa-solid fa-receipt"></i></div>
+        <div class="title">Receptionist</div>
+        <div class="descr">Manages front desk, admissions, and communication tasks.</div>
+      </li>
+
+      <li style="--accent-color:#37474F">
+        <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <div class="title">Student</div>
+        <div class="descr">Access learning resources, submit assignments, and view results.</div>
+      </li>
+
+      <li style="--accent-color:#00796B">
+        <div class="icon"><i class="fa-solid fa-users"></i></div>
+        <div class="title">Parents</div>
+        <div class="descr">Track student attendance, grades, and communicate with teachers.</div>
+      </li>
+
+      <li style="--accent-color:#5D4037">
+        <div class="icon"><i class="fa-solid fa-book-bookmark"></i></div>
+        <div class="title">Librarian</div>
+        <div class="descr">Maintains book records and manages library activities.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="scan-banner">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      
+      <!-- Left Text Section -->
+      <div class="col-md-6 banner-text">
+        <h1>Smart QR Code Scanner</h1>
+        <p>Instantly scan, decode, and share any QR code with advanced recognition and lightning-fast performance.</p>
+        <button class="btn btn-scan mb-3">Start Scanning</button>
+        <div class="app-badges mt-2">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+        </div>
+      </div>
+
+      <!-- Right Scanner Animation Section -->
+      <div class="col-md-6 text-center">
+        <div class="scanner-box">
+          <div class="scan-line"></div>
+          <div class="qr-pattern"></div>
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png" alt="QR Illustration" style="width:120px; opacity:0.9;">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+      /* Banner Section */
+    .scan-banner {
+      position: relative;
+      background: linear-gradient(135deg, #f1f7ff, #ffffff);
+      overflow: hidden;
+      padding: 100px 0;
+    }
+
+    .scan-banner::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle at center, #c8e1ff 0%, transparent 70%);
+      opacity: 0.5;
+      border-radius: 50%;
+    }
+
+    .scan-banner::after {
+      content: "";
+      position: absolute;
+      bottom: -150px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle at center, #e0eeff 0%, transparent 70%);
+      opacity: 0.6;
+      border-radius: 50%;
+    }
+
+    /* Text Section */
+    .banner-text h1 {
+      font-weight: 700;
+      font-size: 2.6rem;
+      color: #0b1f40;
+    }
+
+    .banner-text p {
+      font-size: 1.1rem;
+      color: #444;
+      margin-top: 15px;
+      margin-bottom: 25px;
+    }
+
+    .btn-scan {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 30px;
+      padding: 12px 30px;
+      border: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .btn-scan:hover {
+      background-color: #005ed0;
+      box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+    }
+
+    .app-badges img {
+      width: 140px;
+      margin-right: 12px;
+    }
+
+    /* Scanner Frame */
+    .scanner-box {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      border: 3px solid #007bff;
+      border-radius: 20px;
+      margin: 30px auto;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 25px rgba(0, 123, 255, 0.2);
+      overflow: hidden;
+    }
+
+    /* Scanner red line animation */
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #ff0033, transparent);
+      animation: scan 2.5s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { top: 0; opacity: 1; }
+      50% { top: 95%; opacity: 0.8; }
+      100% { top: 0; opacity: 1; }
+    }
+
+    .qr-pattern {
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      width: 70%;
+      height: 70%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.1),
+        rgba(0,0,0,0.1) 4px,
+        transparent 4px,
+        transparent 8px
+      );
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .banner-text {
+        text-align: center;
+      }
+
+      .banner-text h1 {
+        font-size: 2rem;
+      }
+
+      .app-badges img {
+        width: 120px;
+      }
+
+      .scanner-box {
+        width: 220px;
+        height: 220px;
+      }
+    }
+</style>
+
+<footer></footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>/* see https://codepen.io/m3g4p0p/pen/mdegmgO
+for a more complete version via @m3g4p0p at Sitepoint Forums
+*/
+
+    let root = document.documentElement;
+    const section1 = document.querySelector('.header')
+
+    window.addEventListener('scroll', () => {
+      const y = 1 + (window.scrollY || window.pageYOffset);
+      root.style.setProperty('--gradient-percent', y * 4 + "px");
+      console.log(y)
+    })
+
+  </script>
+</body>
+
+</html>
